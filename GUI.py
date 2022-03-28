@@ -1,7 +1,7 @@
-
-from PyQt5 import QtCore, QtGui, QtWidgets
+# Importation des modules
+from PyQt5 import QtCore, QtGui, QtWidgets # Interface graphique
 from PyQt5 import QtWebEngineWidgets
-import folium
+import folium # Creation de la carte
 import requests # Reqûete web
 from math import cos,sin,acos,pi # Opérations mathématiques
 from urllib.parse import quote # Pour urlencoder
@@ -9,12 +9,13 @@ import io
 
 app = QtWidgets.QApplication([])
 
-# Creation de notre dictionnaire contenant toutes les données nécessaires
 
+# Permet de récupérer le pourcentage de la barre de progression ailleurs dans le programme.
 global p_bar
 p_bar = 0
 
 
+# Toutes les fonctions nécessaire au programme
 def recuperer_parking() -> dict:
     ''' Fonction créant la base de notre dictionnaire contenant tous les parking
         La fonction appelle l'api de l'EMS de Strasbourg pour récupérer les informations, nom_parking, adresse, position
@@ -87,11 +88,6 @@ def recuperer_position_utilisateur(dictionnaire: dict, adresse: str) -> dict:
     return dictionnaire
 
 
-
-
-
-
-
 def localisation_par_adresse_mapbox(adresse: str) -> tuple:
     """ Fonction prenant en compte une chaine de caractère contenant une adresse,
         Utilise l'API geocoding de mapbox, afin de trouver les coordonnes geographique de cette adresse
@@ -100,7 +96,7 @@ def localisation_par_adresse_mapbox(adresse: str) -> tuple:
 
     token = "pk.eyJ1IjoibW9ubW9uNDU4IiwiYSI6ImNsMGZyNmZqeDB1ZDAzamt4dmw5NTZuczIifQ._PUtAJZMG7-WVf3LdJAq1w"
     adresse = quote(adresse)
-    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{adresse}.json?access_token={token}&country=FR"
+    url = f"https://api.mapbox.com/geocoding/v5/mapbox.places/{adresse}, strasbourg.json?access_token={token}&country=FR&fuzzyMatch=True&proximity=7.7521113,48.5734053"
     
     r = requests.get(url)
     coordinates = r.json()['features'][0]['geometry']['coordinates']
@@ -177,7 +173,6 @@ def reel_distance_entre(A: tuple,B: tuple) -> float:
     
     try:
         distance = r.json()['features'][0]['properties']['segments'][0]['distance']
-        temps = r.json()['features'][0]['properties']['segments'][0]['duration']
     except KeyError:
         print("Il faut attendre, l'API ne peut pas être utilisé aussi vite")
         distance = 0
@@ -186,10 +181,6 @@ def reel_distance_entre(A: tuple,B: tuple) -> float:
     fenetre.progressBar.setProperty('value',p_bar)
 
     return distance
-
-def temps_entre(A,B):
-    pass    
-
 
 def trouver_nb_parking(dic_distance_parking: dict, nb_park: int) -> dict:
     """ Fonction prennant un dictionnaire de parkings, et le nombre de parkings à retourner
@@ -249,8 +240,6 @@ def creation_carte(dictionnaire: dict, adresse: str,debug: bool=False) -> None:
     data = io.BytesIO()
 
     # On sauvegarde donc notre carte dans un espace mémoire au lieu d'un fichier
-    
-    
     map.save(data,close_file=False)
     return data
 
@@ -259,18 +248,29 @@ def creation_carte(dictionnaire: dict, adresse: str,debug: bool=False) -> None:
 
 
 
+
+
+# Classe de l'application
+
 class Ui_MainWindow(object):
     #Fonctions 
+    nb_parking = 5
 
 
     def setupUi(self, MainWindow):
+        """ Fonction permettant de créer tous les objects graphiques de l'interface"""
+
+        # Création de la fenêtre principale
+        height = 1900
+        width = 1050
+
         MainWindow.setObjectName("Projet Parking Strasbourg")
         MainWindow.setWindowTitle("Projet Parking Strasbourg")
         MainWindow.setWindowIcon(QtGui.QIcon('icon_parking.png'))
-        MainWindow.resize(1900, 1050)
-        MainWindow.setMinimumSize(QtCore.QSize(1900, 1050))
-        MainWindow.setMaximumSize(QtCore.QSize(1900, 1050))
-        MainWindow.setBaseSize(QtCore.QSize(1900, 1050))
+        MainWindow.resize(height, width)
+        MainWindow.setMinimumSize(QtCore.QSize(height, width))
+        MainWindow.setMaximumSize(QtCore.QSize(height, width))
+        MainWindow.setBaseSize(QtCore.QSize(height, width))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -296,7 +296,7 @@ class Ui_MainWindow(object):
         self.Liste_parking.setGeometry(QtCore.QRect(10, 180, 591, 861))
         self.Liste_parking.setObjectName("Liste_parking")
 
-        # Check box
+        ### Check box ###
 
         # Distance réelle
         self.reel = QtWidgets.QCheckBox(self.centralwidget)
@@ -321,6 +321,7 @@ class Ui_MainWindow(object):
         map.save(data,close_file=False)
 
 
+        # Carte
         self.Carte = QtWebEngineWidgets.QWebEngineView(self.centralwidget)
         self.Carte.setHtml(data.getvalue().decode())
         self.Carte.setGeometry(QtCore.QRect(610, 0, 1291, 1221))
@@ -341,18 +342,13 @@ class Ui_MainWindow(object):
         self.reel.setText(_translate("MainWindow", "Distance voiture "))
         self.oiseau.setText(_translate("MainWindow", "Distance approximative"))
 
-
-
-
-    nb_parking=5
-
+    ### Fonctions liées à l'application ###
 
     def action_bouton(self):
         """ Fonction appellée lorsque l'utilisateur clique sur le bouton,
             Elle génère notre carte et notre liste en fonction de l'adresse donnée"""
         # On récupère l'adresse saisie dans la boite
         adresse = str(self.Champ.text())
-        print(f"L'adresse désirée est : {adresse}")
 
         # Création de notre dictionnaire
         dictionnaire = recuperer_places_libre(recuperer_parking())
@@ -363,22 +359,19 @@ class Ui_MainWindow(object):
         # On crée notre carte et notre liste en fonction de cette adresse
         self.creation_carte_parking(dictionnaire_nb_parking,adresse)
         self.creation_liste_parking(dictionnaire_nb_parking)
-        print(p_bar)
-        print("Carte crée")
 
     
     def creation_carte_parking(self,dictionnaire_nb_parking:dict ,adresse:str) -> None:
         """ Fonction créant notre objet QWebEngineView, permettant d'intégrer notre carte dans l'application,
-            La carte sera fournie par la fonction creation_carte de notre module fonctions."""
+            La carte sera fournie par la fonction creation_carte"""
         data = creation_carte(dictionnaire_nb_parking,adresse)
         # Data contient notre carte
 
-        # Création de la carte dans l'application
-        
+        # On modifie le contenu html de notre objet carte par notre carte
         self.Carte.setHtml(data.getvalue().decode())
 
     def creation_liste_parking(self, dictionnaire_nb_parking: dict) -> None:
-        """ Fonction créant l'objet de notre liste, et l'ajoute au programme"""
+        """ Fonction ajoutant notre liste à jour à l'application"""
         
         # Les différentes couleurs utilisées
         red = QtGui.QColor("#FF0000")
@@ -387,9 +380,10 @@ class Ui_MainWindow(object):
         grey = QtGui.QColor("#808080")
         dark_grey = QtGui.QColor("#A9A9A9")
 
+        # Chaque fois qu'on appelle la fonction, on réinitialise notre liste
         self.Liste_parking.clear()
+        
 
-        # Création de notre objet liste
         i = 0
         for parking in dictionnaire_nb_parking:
             if parking[0] != "Votre position":
@@ -431,15 +425,12 @@ class Ui_MainWindow(object):
                 # Si le nombre de place libre est bon
                 else:
                     self.Liste_parking.item(i).setBackground(green)
-                
-
-                
                 i += 1
 
 
 
 
-
+# Creation notre objet QT modifié
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, obj=None, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
