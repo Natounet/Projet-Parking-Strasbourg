@@ -1,0 +1,148 @@
+@font-face {
+    font-family: "Dejavu";
+    src: url("fonts/DejaVuSansMono.ttf");
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/RobotoMono-VariableFont_wght.ttf");
+}
+
+
+
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    color: white;
+    background-color: #31455D;
+    font-family: "Roboto", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    scroll-behavior: smooth;
+}
+
+/* Header et barre de navigation */
+header{
+    width: 100%;
+    padding: 10px 0;
+    /* border: 1px solid blue; */
+    background-color: #27374A;
+    position: fixed;
+    top: 0;
+
+    
+}
+
+/* Barre de nav */
+header a {
+    /* border: 1px solid lightgreen; */
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+header a:hover {
+    color: grey;
+    transition: 0.3s;
+
+}
+
+div a {
+    color: #15202c;
+}
+
+/* Section principale */
+
+
+.main {
+    /* border: 1px solid purple; */
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align:justify;
+    padding-top: 40px;
+}
+
+@media (max-width: 800px) or (max-width: 800px) { 
+    .main {
+        /* border: 1px solid purple; */
+        margin-left: 10%;
+        margin-right: 10%;
+        text-align:justify;
+        padding-top: 40px;
+    }
+
+    footer {
+        margin-left: 20%;
+        margin-right: 20%;
+
+    }
+ }
+
+.main h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+.main p {
+    font-size: large;
+}   
+
+div {
+    margin-bottom: 100px;
+}
+
+h2 {
+    font-family: "Dejavu", 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: brown;
+    text-decoration: underline;
+}
+
+h4 { 
+    text-decoration: underline;
+}
+.vert {
+    color: green;
+    text-decoration: underline;
+}
+
+.jaune {
+    color: yellow;
+    text-decoration: underline;
+}
+
+.rouge {
+    color: red;
+    text-decoration: underline;
+}
+
+.gris {
+    color: grey;
+    text-decoration: underline;
+}
+
+/* Photo */
+
+
+/* Téléchargement */
+
+pre code {
+    background-color: #27374A;
+    border: 1px solid #27374A;
+    display: block;
+    white-space: pre-wrap;
+    
+  }
+
+
+/* Réseaux sociaux */
+
+footer {
+    /* border: 1px solid; */
+    display: flex;
+}
+
+footer div {
+    width:50%;
+    height: 100%;
+    text-align: center;
+}
+

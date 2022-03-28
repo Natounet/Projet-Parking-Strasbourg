@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css" />
+        <title>StrasPark'</title>
+    </head>
+
+    <body>
+        <header>
+            <a href="#description">Description</a>
+            <a href="#images">Images</a>
+            <a href="#telechargement">Téléchargement</a>
+        </header>
+
+       
+        <section class="main">
+             <!-- Partie description -->
+            <div id="description">
+                <h1>Stras Park'</h1>
+
+                <p><h2>Description:</h2>
+                    Le projet est simple, vous souhaitez vous rendre quelque part à Strasbourg et vous cherchez à trouver 
+                    les parkings les plus proches de votre destination ainsi que le nombre de places disponibles dans chacun d'entre eux.
+                </p>
+                <p><h2>Utilisation:</h2>
+                    <ol>
+                        <li>Téléchargez l'interface graphique</li>
+                        <li>Lancez le programme</li>
+                        <li>Entrez l'adresse de destination</li>
+                        <li>Choisissez entre distance à pied et distance en voiture</li>
+                        <li>L'application vous affiche la liste des parkings les plus proches ainsi qu'une carte interactive</li>
+                    </ol>
+                </p>
+
+                <p><h2>Informations utiles:</h2>
+                Les couleurs correspondent à :
+                <ul>
+                    <li><span class="vert">Vert</span> : le nombre de places libres est supérieur à 30% du nombre total de places</li>
+                    <li><span class="jaune">Jaune</span> : le nombre de places libres est inférieur à 30% du nombre total de places</li>
+                    <li><span class="rouge">Rouge</span> : le parking est complet, est fermé, où les informations en temps réel sont indisponibles</li>
+                    <li><span class="gris">Gris</span> : les informations sont indisponibles</li>
+                </ul>
+                </p>
+            </div>
+
+            <!-- Partie photos -->
+
+            <div id="images">
+                <h2>Images:</h2>
+                <h4>Page de démarrage de l'application:</h4>
+                <img src="images/accueil_app.png" alt="Image de la page d'accueil de l'application" width=100%/>
+
+                
+                <h4>Resultat de la recherche: </h4>
+                <img src="images/final_app.png" alt="Image du resultat d'une recherche" width=100%/>
+            </div>
+            
+            <!-- Partie téléchargement -->
+
+            <div id="telechargement"> 
+            <h2>Téléchargement:</h2>
+            <h4>Installation de l'interface</h4>
+
+            <p>1) Téléchargez l'interface<br>
+            - <a href="https://github.com/Natounet/Projet-Parking-Strasbourg/archive/refs/heads/main.zip">Interface</a><br><br>
+            2) Mettez vos fichiers dans un même dossier
+        </p>
+
+            <h4>Installation des prérequis</h4>
+            <ul>
+                <li>Requests</li>
+                <li>PyQt5</li>
+                <li>PyQtWebEngine</li>
+                <li>folium</li>
+                <li>Urllib3</li>
+            </ul>
+
+            <pre>
+                <code>
+ pip install requests pyqt5 pyqtwebengine folium urllib3
+                </code>
+              </pre>
+
+            <p>ou installez les modules en utilisant le fichier "requirement.txt"</p>
+
+            <pre>
+                <code>
+ pip install -r requirements.txt
+                </code>
+              </pre>
+
+            <h4>Utilisation:</h4>
+            <p>Il vous suffit maintenant de lancer le programme de la façon de votre choix.<br></p>
+        
+            <h4>Lien github du projet:</h4>
+            <p>
+            > <a href="https://github.com/Natounet/StrasPark" target="_blank">Répertoire github</a>
+            </p>
+            </div>
+
+            <h4>Réseaux sociaux:</h4><br>
+            
+        </section>
+
+        <footer>
+                
+            <div id="leon">Léon<br><br>
+                <a href="https://github.com/WiroWik/" target="_blank"><img src="images/github.png" alt="Logo github"  width="48px"/></a>
+                <a href="https://www.instagram.com/wiro.wik/?hl=fr" target="_blank"><img src="images/insta.png" alt="Logo instagram"  width="48px"/></a>
+                <a href="https://twitter.com/WiroWik" target="_blank"><img src="images/twitter.png" width="48px" alt="Logo twitter" /></a>
+                <a href="https://discordapp.com/users/294863478441639936" target="_blank"><img src="images/discord.png" alt="Logo discord" width="48px"/></a>
+            </div>
+            
+            <div id="nathan">Nathan<br><br> 
+                <a href="https://github.com/Natounet/" target="_blank"><img src="images/github.png" alt="Logo github"  width="48px"/></a>
+                <a href="https://www.instagram.com/nat_ounet/?hl=fr" target="_blank"><img src="images/insta.png" alt="Logo instagram"  width="48px"/></a>
+                <a href="https://twitter.com/Nat_Corneloup" target="_blank"><img src="images/twitter.png" width="48px" alt="Logo twitter"/></a>
+                <a href="https://discordapp.com/users/265102460194914304" target="_blank"><img src="images/discord.png" width="48px" alt="Logo discord"/></a>
+            </div>
+            
+        </footer>
+        
+
+    </body>
+
+
+</html>
