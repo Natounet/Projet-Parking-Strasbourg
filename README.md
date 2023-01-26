@@ -18,6 +18,8 @@ Les résultats affichés sont en 4 couleurs :
 2. Sélecteur de distance ( Distance en voiture ou distance à vol d'oiseau )
 3. Résultat de votre recherche dans l'ordre croissant des distances
 
+Si vous ne cochez pas de cases pour la distance, par défaut, la distance à vol d'oiseau sera utilisée
+
 
 ### Informations notables
  
