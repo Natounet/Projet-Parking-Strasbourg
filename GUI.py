@@ -226,7 +226,7 @@ def creation_carte(dictionnaire: dict, adresse: str,debug: bool=False) -> None:
             # Si il n'y a plus de places disponibles
             elif int(p_libre) == 0 or etat == 'Fermé':
                 color = 'red'
-            # Si le nombre de places restantes est inférieur à 50% du nombre total de places
+            # Si le nombre de places restantes est inférieur à 15% du nombre total de places
             elif int(p_libre) < int(total)*0.15:
                 color = 'orange'
             # Si le nombre de place libre est bon
@@ -264,8 +264,8 @@ class Ui_MainWindow(object):
         height = 1900
         width = 1050
 
-        MainWindow.setObjectName("Projet Parking Strasbourg")
-        MainWindow.setWindowTitle("Projet Parking Strasbourg")
+        MainWindow.setObjectName("StrasPark")
+        MainWindow.setWindowTitle("StrasPark")
         MainWindow.setWindowIcon(QtGui.QIcon('icon_parking.png'))
         MainWindow.resize(height, width)
         MainWindow.setMinimumSize(QtCore.QSize(height, width))
@@ -338,7 +338,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("Projet Parking Strasbourg", "Projet Parking Strasbourg"))
+        MainWindow.setWindowTitle(_translate("StrasPark", "StrasPark"))
         self.reel.setText(_translate("MainWindow", "Distance voiture "))
         self.oiseau.setText(_translate("MainWindow", "Distance approximative"))
 
